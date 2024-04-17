@@ -2,7 +2,7 @@ ENTRY(_start)
  
 SECTIONS
 {
-    /* Starts at LOADER_ADDR. */
+    /* Starts at LOADER_ADDR. The . stands for current address. */
     . = 0x8000;
     __start = .;
     __text_start = .;

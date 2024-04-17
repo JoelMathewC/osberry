@@ -29,10 +29,20 @@ enum
     UART0_TDR    = (UART0_BASE + 0x8C),
 };
 
+/*
+Initializing the UART Hardware.
+*/
 void uart_init();
 
+/*
+Writing a character to the UART console.
+param {unsigned char} c: character to be written to console.
+return {void}: nothing
+*/
 void uart_putc(unsigned char c);
 
+/*
+Reading a character from the UART console.
+return {unsigned char}: character read from the UART console.
+*/
 unsigned char uart_getc();
-
-void uart_puts(const char* str);

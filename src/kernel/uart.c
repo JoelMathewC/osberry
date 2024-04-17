@@ -10,11 +10,22 @@ static inline void delay(int32_t count)
             : "=r"(count): [count]"0"(count) : "cc");
 }
 
+/*
+Writes data to a specified memory address.
+param {uint32_t} reg : Memory address in which the value is to be stored.
+param {uint32_t} data : Data to be stored in the register (4 bytes)
+return {void} : Nothing
+*/
 static inline void mmio_write(uint32_t reg, uint32_t data)
 {
     *(volatile uint32_t*)reg = data;
 }
 
+/*
+Reads data from a specified memory address.
+param {uint32_t} reg : Memory address from which value is to be read.
+return {uint32_t} value stored in the specified memory location.
+*/
 static inline uint32_t mmio_read(uint32_t reg)
 {
     return *(volatile uint32_t*)reg;
@@ -55,10 +66,4 @@ unsigned char uart_getc()
 {
     while ( mmio_read(UART0_FR) & (1 << 4) ) { }
     return mmio_read(UART0_DR);
-}
-
-void uart_puts(const char* str)
-{
-    for (size_t i = 0; str[i] != '\0'; i++)
-        uart_putc((unsigned char)str[i]);
 }
